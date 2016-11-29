@@ -1,3 +1,4 @@
+<!-- If the session is set with logged_in display the logout button -->
 <?php if($this->session->userdata('logged_in')): ?>
     <h2>Logout</h2>
 
@@ -22,10 +23,10 @@
     <?php echo form_close(); ?>
     <!-- Close the logout form -->
 
-
+<!-- If the session is not set display the login_form -->
 <?php else: ?>
 
-
+<!-- This is form attributes -->
 <?php $attributes = array('id' => 'login_form', 'class'=> 'form_horizontal') ?>
 
 <!-- If the flashdata is set errors are present; show them -->

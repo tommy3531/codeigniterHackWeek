@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <title>Home</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-
+    <link rel="stylesheet" href="<?php base_url(); ?>/assests/css/main.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
@@ -23,32 +22,38 @@
                 </button>
                 <a class="navbar-brand" href="#">HackWeek</a>
             </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
+            <!-- TODO: Use javascript to show links -->
+            <!-- If the session is display the home, logout and members Area link -->
+            <?php if($this->session->userdata('logged_in')): ?>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a href="<?php echo base_url(); ?>/home/index">Home<span class="sr-only">(current)</span></a></li>
+                        <li><a href="<?php echo base_url(); ?>/users/logout">Logout</a>
+                        <li><a href="<?php echo base_url(); ?>/members/index">Members Area</a>
+                    </ul>
+                </div>
+            <?php else: ?>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="<?php echo base_url(); ?>">Home<span class="sr-only">(current)</span></a></li>
                     <li><a href="<?php echo base_url(); ?>/users/register">Register<span class="sr-only">(current)</span></a></li>
-
-
-                    </li>
+                    <li><a href="<?php echo base_url(); ?>/home/index">Home</a>
+                    <li><a href="<?php echo base_url(); ?>/users/index">Login</a>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#">Link</a></li>
                     <li class="dropdown">
-
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
+            <?php endif; ?>
+            <!-- Else display teh register, home and login link -->
+
         </div><!-- /.container-fluid -->
     </nav>
 </div>
 
 <div class="container">
-        <div class="col-xs-3">
-            <?php $this->load->view('users/login_view'); ?>
-        </div>
-        <div class="col-xs-9">
+        <div class="col-xs-12">
             <?php $this->load->view($main_view); ?>
         </div>
 </div>
