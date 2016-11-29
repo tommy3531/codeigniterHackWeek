@@ -4,10 +4,39 @@
 
 class User_model extends CI_Model
 {
-    public function get_users()
+
+    public function create_user()
     {
-        $query = $this->db->get('users');
-        return $query->result();
+        $data = array(
+
+            'username' => $this->input->post('username'),
+            'password' => $this->input->post('password'),
+            'first_name' => $this->input->post('first_name'),
+            'lastname' => $this->input->post('lastname'),
+            'email' => $this->input->post('email')
+
+        );
+
+        $insert_data = $this->db->insert('users', $data);
+        return $insert_data;
+    }
+
+    public function login_user($username, $password)
+    {
+        $this->db->where('username', $username);
+        $this->db->where('password', $password);
+
+        $result = $this->db->get('users');
+
+        if($result->num_rows() == 1)
+        {
+            return $result->row(0)->id;
+        }
+        else
+        {
+            return false;
+        }
+
     }
 }
 
